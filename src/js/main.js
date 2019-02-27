@@ -10,6 +10,7 @@ const context2 = canvas2.getContext('2d');
 
 context2.scale(20, 20);
 
+
 // Color
 const colors = [
     null,
@@ -44,12 +45,12 @@ const player2 = {
 
 // Waktu 1
 let dropCounter1 = 0;
-let dropInterval1 = 1000;
+let dropInterval1 = 200;
 let lastTime1 = 0;
 
 // Waktu 2
 let dropCounter2 = 0;
-let dropInterval2 = 1000;
+let dropInterval2 = 200;
 let lastTime2 = 0;
 
 // Kontrol game 1
@@ -82,7 +83,6 @@ document.addEventListener('keydown', event2 => {
     }
 });
 
-
 // Fungsi hapus paling bawah + skor 1
 function arenaSweep1(){
     let rowCount = 1;
@@ -92,11 +92,10 @@ function arenaSweep1(){
                 continue outer;
             }
         }
-
         const row1 = arena1.splice(y, 1)[0].fill(0);
         arena1.unshift(row1);
         ++y;
-
+        
         player1.score1 += rowCount * 10;
         rowCount *= 2;
     }
@@ -155,7 +154,7 @@ function collide2(arena2, player2){
 function createMatrix1(w, h){
     const matrix1 = [];
     while (h--){
-        matrix1.push(new Array(w).fill(0));
+        matrix1.push(new Array(w).fill(0))
     }
     return matrix1;
 }
@@ -175,8 +174,8 @@ function createPiece1(type){
         return [
             [0, 0, 1, 0],
             [0, 0, 1, 0],
-            [1, 1, 1, 1],
-            [0, 0, 1, 1],
+            [1, 1, 1, 0],
+            [0, 0, 0, 0],
         ];
     } else if ( type === 'L'){
         return [
@@ -187,6 +186,7 @@ function createPiece1(type){
         ];
     } else if ( type === 'J'){
         return [
+            [3, 0, 0, 3],
             [3, 0, 0, 3],
             [3, 0, 0, 3],
             [3, 0, 0, 3],
@@ -223,8 +223,8 @@ function createPiece2(type){
         return [
             [0, 0, 1, 0],
             [0, 0, 1, 0],
-            [1, 1, 1, 1],
-            [0, 0, 1, 1],
+            [1, 1, 1, 0],
+            [0, 0, 0, 0],
         ];
     } else if ( type === 'L'){
         return [
@@ -235,6 +235,7 @@ function createPiece2(type){
         ];
     } else if ( type === 'J'){
         return [
+            [3, 0, 0, 3],
             [3, 0, 0, 3],
             [3, 0, 0, 3],
             [3, 0, 0, 3],
@@ -308,6 +309,7 @@ function merge1(arena1, player1){
     player1.matrix1.forEach((row1, y) => {
         row1.forEach((value, x) =>{
             if (value !== 0){
+                // console.log(value);
                 arena1[y + player1.pos1.y][x + player1.pos1.x] = value;
             }
         });
@@ -369,6 +371,7 @@ function playerDrop1(){
     if(collide1(arena1, player1)){
         player1.pos1.y--;
         merge1(arena1, player1);
+        //jika tinggi belum mencapai apa ===>>> playerReset1();
         playerReset1();
         arenaSweep1();
         updateScore1();
@@ -473,6 +476,7 @@ function update1(time = 0){
     lastTime1 = time;
 
     draw1();
+    //if tinggi belum mencapai maka ==>>> requestAnimationFrame(update2); 
     requestAnimationFrame(update1);
 }
 
@@ -506,6 +510,11 @@ playerReset2();
 updateScore2();
 update2();
 
+function PlaySound(soundObj) {
+    var sound = document.getElementById(soundObj);
+    sound.Play();
+  }
 
+// PlaySound("sound1");
 
-
+// PlaySound("sound2");

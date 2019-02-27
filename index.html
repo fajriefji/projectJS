@@ -9,50 +9,56 @@
 </head>
 <body>
     <div>
-        <a style="margin-left:33%; color:black; font-weight: bold" id="score1"></a>
-        <a style="margin-left:31%; color:black; font-weight: bold" id="score2"></a>
+        <button class="btn-change-refresh"><a style="text-decoration: none;" class="text-color xbootstrap" href="./index.html">Re-Start</a></button>
+        <div>
+            <a style="margin-left:-7%; margin-top: 28%;  font-size: 35px; color:black; font-weight: bold; position: fixed;">P1 score</a>
+            <a style="margin-left:7%; margin-top: 27%;  font-size: 60px; color:black; font-weight: bold; position: fixed;" id="score1"></a>
+        </div>
+        <div>
+            <a style="margin-left:-7%; margin-top: 36%;  font-size: 35px; color:black; font-weight: bold; position: fixed;">P2 score</a>
+            <a style="margin-left:7%; margin-top: 35%;  font-size: 60px; color:black; font-weight: bold; position: fixed;" id="score2"></a>
+        </div>
     </div>
-    <div class="container">
+    <div class="container-fluid">
         <div class="snowflakes" aria-hidden="true">
-                <div class="snowflake">
-                ❅
-                </div>
-                <div class="snowflake">
-                ❅
-                </div>
-                <div class="snowflake">
-                ❆
-                </div>
-                <div class="snowflake">
-                ❄
-                </div>
-                <div class="snowflake">
-                ❅
-                </div>
-                <div class="snowflake">
-                ❆
-                </div>
-                <div class="snowflake">
-                ❄
-                </div>
-                <div class="snowflake">
-                ❅
-                </div>
-                <div class="snowflake">
-                ❆
-                </div>
-                <div class="snowflake">
-                ❄
-                </div>
-    </div>
+            <div class="snowflake">
+            ❅
+            </div>
+            <div class="snowflake">
+            ❅
+            </div>
+            <div class="snowflake">
+            ❆
+            </div>
+            <div class="snowflake">
+            ❄
+            </div>
+            <div class="snowflake">
+            ❅
+            </div>
+            <div class="snowflake">
+            ❆
+            </div>
+            <div class="snowflake">
+            ❄
+            </div>
+            <div class="snowflake">
+            ❅
+            </div>
+            <div class="snowflake">
+            ❆
+            </div>
+            <div class="snowflake">
+            ❄
+            </div>
+        </div>
         <div class="section-row">
-            <div class="col-lg-12 center">
+            <div class="col-lg-12 center" style="padding-top: 2%">
                 <canvas id="tetris1" width="300" height="400"></canvas>
                 <canvas id="tetris2" width="300" height="400"></canvas>
             </div>
         </div>
     </div>
     <script src="./src/js/main.js"></script>
-    <!-- <script src="./src/js/main2.js"></script> -->
 </body>
 </html>
