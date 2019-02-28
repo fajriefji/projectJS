@@ -21,6 +21,8 @@ const colors = [
     '#FF8E0D',
     '#FFE138',
     '#3877FF',
+    '#1227FF',
+    '#F538FF'
 ];
 
 // Matrix 1
@@ -124,11 +126,10 @@ function arenaSweep2(){
 function collide1(arena1, player1){
     const m1 = player1.matrix1;
     const o1 = player1.pos1;
-
     for ( let y = 0; y < m1.length; ++y){
         for (let x = 0; x < m1[y].length; ++x){
             if (m1[y][x] !== 0 && (arena1[y + o1.y] && arena1[y + o1.y][x + o1.x]) !== 0){
-                return true;
+                return true; 
             }
         }
     }
@@ -172,10 +173,9 @@ function createMatrix2(w, h){
 function createPiece1(type){
     if( type === 'I'){
         return [
-            [0, 0, 1, 0],
-            [0, 0, 1, 0],
-            [1, 1, 1, 0],
-            [0, 0, 0, 0],
+            [0, 0, 1],
+            [0, 0, 1],
+            [1, 1, 1],
         ];
     } else if ( type === 'L'){
         return [
@@ -186,10 +186,9 @@ function createPiece1(type){
         ];
     } else if ( type === 'J'){
         return [
-            [3, 0, 0, 3],
-            [3, 0, 0, 3],
-            [3, 0, 0, 3],
-            [3, 0, 0, 3],
+            [3, 0, 3],
+            [3, 0, 3],
+            [3, 0, 3],
         ];
     } else if ( type === 'O'){
         return [
@@ -213,6 +212,19 @@ function createPiece1(type){
             [0, 7, 0],
             [7, 7, 7],
             [0, 0, 0],
+        ];
+    } else if ( type === 'A'){
+        return [
+            [0, 8, 0],
+            [0, 8, 0],
+            [0, 8, 0],
+            [0, 8, 0],
+        ];
+    }  else if ( type === 'F'){
+        return [
+            [9, 9, 0],
+            [9, 9, 9],
+            [0, 9, 0],
         ];
     }
 }
@@ -221,10 +233,9 @@ function createPiece1(type){
 function createPiece2(type){
     if( type === 'I'){
         return [
-            [0, 0, 1, 0],
-            [0, 0, 1, 0],
-            [1, 1, 1, 0],
-            [0, 0, 0, 0],
+            [0, 0, 1],
+            [0, 0, 1],
+            [1, 1, 1],
         ];
     } else if ( type === 'L'){
         return [
@@ -235,10 +246,9 @@ function createPiece2(type){
         ];
     } else if ( type === 'J'){
         return [
-            [3, 0, 0, 3],
-            [3, 0, 0, 3],
-            [3, 0, 0, 3],
-            [3, 0, 0, 3],
+            [3, 0, 3],
+            [3, 0, 3],
+            [3, 0, 3],
         ];
     } else if ( type === 'O'){
         return [
@@ -262,6 +272,19 @@ function createPiece2(type){
             [0, 7, 0],
             [7, 7, 7],
             [0, 0, 0],
+        ];
+    } else if ( type === 'A'){
+        return [
+            [0, 8, 0],
+            [0, 8, 0],
+            [0, 8, 0],
+            [0, 8, 0],
+        ];
+    }  else if ( type === 'F'){
+        return [
+            [9, 9, 0],
+            [9, 9, 9],
+            [0, 9, 0],
         ];
     }
 }
@@ -309,7 +332,6 @@ function merge1(arena1, player1){
     player1.matrix1.forEach((row1, y) => {
         row1.forEach((value, x) =>{
             if (value !== 0){
-                // console.log(value);
                 arena1[y + player1.pos1.y][x + player1.pos1.x] = value;
             }
         });
@@ -371,11 +393,10 @@ function playerDrop1(){
     if(collide1(arena1, player1)){
         player1.pos1.y--;
         merge1(arena1, player1);
-        //jika tinggi belum mencapai apa ===>>> playerReset1();
         playerReset1();
         arenaSweep1();
         updateScore1();
-    }
+        }
 
     dropCounter1 = 0;
 }
@@ -408,7 +429,7 @@ function playerMove2(offset){
 }
 
 function playerReset1(){
-    const pieces1 = 'TJLOSZI';
+    const pieces1 = 'TJLOSZIAF';
     player1.matrix1 = createPiece1(pieces1[pieces1.length * Math.random() | 0]);
     player1.pos1.y = 0;
     player1.pos1.x = (arena1[0].length / 2 | 0) - (player1.matrix1[0].length / 2 | 0);
@@ -421,7 +442,7 @@ function playerReset1(){
 }
 
 function playerReset2(){
-    const pieces2 = 'TJLOSZI';
+    const pieces2 = 'TJLOSZIAF';
     player2.matrix2 = createPiece2(pieces2[pieces2.length * Math.random() | 0]);
     player2.pos2.y = 0;
     player2.pos2.x = (arena2[0].length / 2 | 0) - (player2.matrix2[0].length / 2 | 0);
@@ -476,7 +497,6 @@ function update1(time = 0){
     lastTime1 = time;
 
     draw1();
-    //if tinggi belum mencapai maka ==>>> requestAnimationFrame(update2); 
     requestAnimationFrame(update1);
 }
 
@@ -510,11 +530,28 @@ playerReset2();
 updateScore2();
 update2();
 
+
+function myMove() {
+    var elem = document.getElementById("myAnimation");   
+    var pos = 0;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (pos == 350) {
+        clearInterval(id);
+      } else {
+        pos++; 
+        elem.style.top = pos + 'px'; 
+        elem.style.left = pos + 'px'; 
+      }
+    }
+  }
+  
 function PlaySound(soundObj) {
     var sound = document.getElementById(soundObj);
     sound.Play();
   }
 
-// PlaySound("sound1");
 
-// PlaySound("sound2");
+PlaySound("sound1");
+PlaySound("sound2");
+
