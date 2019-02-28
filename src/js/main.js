@@ -1,3 +1,4 @@
+// =================== Rumus game =========================
 // Canvas 1
 const canvas1 = document.getElementById('tetris1');
 const context1 = canvas1.getContext('2d');
@@ -112,7 +113,6 @@ function arenaSweep2(){
                 continue outer;
             }
         }
-
         const row2 = arena2.splice(y, 1)[0].fill(0);
         arena2.unshift(row2);
         ++y;
@@ -222,9 +222,9 @@ function createPiece1(type){
         ];
     }  else if ( type === 'F'){
         return [
-            [9, 9, 0],
-            [9, 9, 9],
             [0, 9, 0],
+            [9, 9, 9],
+            [9, 9, 0],
         ];
     }
 }
@@ -282,9 +282,9 @@ function createPiece2(type){
         ];
     }  else if ( type === 'F'){
         return [
-            [9, 9, 0],
-            [9, 9, 9],
             [0, 9, 0],
+            [9, 9, 9],
+            [9, 9, 0],
         ];
     }
 }
@@ -391,11 +391,11 @@ function rotate2(matrix2, dir){
 function playerDrop1(){
     player1.pos1.y++;
     if(collide1(arena1, player1)){
-        player1.pos1.y--;
-        merge1(arena1, player1);
-        playerReset1();
-        arenaSweep1();
-        updateScore1();
+            player1.pos1.y--;
+            merge1(arena1, player1);
+            playerReset1();
+            arenaSweep1()
+            updateScore1();
         }
 
     dropCounter1 = 0;
@@ -521,7 +521,24 @@ function updateScore1(){
 function updateScore2(){
     document.getElementById('score2').innerText = player2.score2;
 }
+// ===========================================================
 
+// =========== Waktu =================
+function Timer(){
+    var timeleft = 30;
+    var downloadTimer = setInterval(function(){
+    document.getElementById("countdown").innerHTML = timeleft;
+    timeleft -= 1;
+    if(timeleft <= 0){
+        clearInterval(downloadTimer);
+        document.getElementById("countdown").innerHTML = "KO"
+    }
+    }, 1000);
+}
+// ======================================
+
+
+// ================== eksekusi game ======================
 playerReset1();
 updateScore1();
 update1();
@@ -530,7 +547,10 @@ playerReset2();
 updateScore2();
 update2();
 
+Timer();
+// ======================================================
 
+//=========== Animasi =============
 function myMove() {
     var elem = document.getElementById("myAnimation");   
     var pos = 0;
@@ -545,7 +565,8 @@ function myMove() {
       }
     }
   }
-  
+
+// =========  Lagu backsound =========
 function PlaySound(soundObj) {
     var sound = document.getElementById(soundObj);
     sound.Play();
